@@ -1,0 +1,265 @@
+:root {
+    --bg: #f5f7fa;
+    --card: #ffffff;
+    --accent: #0f62fe;
+    --muted: #6b7280;
+    --text: #0b1220;
+    --radius: 10px;
+}
+
+* {
+    box-sizing: border-box
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+    background: var(--bg);
+    color: var(--text)
+}
+
+a {
+    color: inherit;
+    text-decoration: none
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 16px
+}
+
+/* ヘッダー */
+.site-header {
+    background: #fff;
+    border-bottom: 1px solid #e6e9ee;
+    position: sticky;
+    top: 0;
+    z-index: 30
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 0
+}
+
+.brand {
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 1.1rem
+}
+
+.brand .tag {
+    font-weight: 600;
+    color: #374151;
+    font-size: 0.8rem;
+    margin-left: 8px
+}
+
+.site-nav {
+    display: flex;
+    gap: 12px;
+    margin-left: 24px
+}
+
+.nav-item {
+    padding: 8px 10px;
+    border-radius: 8px;
+    color: var(--muted);
+    font-size: 0.95rem
+}
+
+.nav-item:hover {
+    background: #f1f5f9;
+    color: var(--text)
+}
+
+.header-actions {
+    margin-left: auto;
+    display: flex;
+    gap: 10px;
+    align-items: center
+}
+
+.btn {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer
+}
+
+.btn-outline {
+    border: 1px solid #d1d5db;
+    background: transparent
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: #fff;
+    border: 1px solid rgba(15, 98, 254, 0.1)
+}
+
+/* ヒーロー */
+.hero {
+    padding: 48px 0;
+    background: linear-gradient(180deg, #ffffff00, #f8fafc)
+}
+
+.hero-inner {
+    display: flex;
+    gap: 24px;
+    align-items: center
+}
+
+.hero-copy {
+    flex: 1
+}
+
+.hero-copy h1 {
+    margin: 0 0 12px;
+    font-size: 2rem;
+    line-height: 1.15
+}
+
+.hero-copy p {
+    margin: 0 0 18px;
+    color: var(--muted)
+}
+
+.hero-cta {
+    display: flex;
+    gap: 12px
+}
+
+.hero-visual {
+    width: 360px;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.mock {
+    width: 320px;
+    height: 190px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #eef2ff, #f3f9ff);
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.08)
+}
+
+/* 機能 */
+.features {
+    padding: 30px 0
+}
+
+.features h2 {
+    margin: 0 0 18px
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px
+}
+
+.feature {
+    background: var(--card);
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid #eef2ff
+}
+
+/* スタッツ */
+.stats {
+    display: flex;
+    gap: 18px;
+    padding: 20px 0;
+    align-items: center
+}
+
+.stat {
+    background: var(--card);
+    padding: 14px;
+    border-radius: 12px;
+    min-width: 120px;
+    text-align: center;
+    border: 1px solid #eef2ff
+}
+
+.stat strong {
+    display: block;
+    font-size: 1.3rem;
+    color: var(--accent)
+}
+
+/* ニュース */
+.news {
+    padding: 20px 0
+}
+
+.news-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px
+}
+
+.news-list time {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-right: 8px
+}
+
+/* フッター */
+.site-footer {
+    background: #fff;
+    border-top: 1px solid #e6e9ee;
+    padding: 28px 0;
+    margin-top: 36px
+}
+
+.footer-inner {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: flex-start
+}
+
+.footer-left .small {
+    font-weight: 700
+}
+
+/* レスポンシブ */
+@media(max-width:900px) {
+    .hero-inner {
+        flex-direction: column-reverse
+    }
+
+    .site-nav {
+        display: none
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr
+    }
+
+    .footer-inner {
+        flex-direction: column;
+        gap: 8px
+    }
+}
+
+@media(min-width:901px) {
+    .hero-copy h1 {
+        font-size: 2.4rem
+    }
+}
+
+/* ...existing code... */
