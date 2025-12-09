@@ -1,0 +1,74 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: rgb(204, 224, 243);
+}
+
+.wapper{
+    width: 90%;
+    max-width: 1000px;
+    min-width: 800px;
+    margin: 0 auto;
+}
+/*ヘッダー------------------------*/
+header h1{
+    display: flex;
+    justify-content: center;
+    background-color: #ffffff;
+    padding: 30px 0;
+}
+
+header nav{
+    background-color: #eee;
+}
+
+header nav ul{
+    list-style: none;
+    display: flex;
+    gap: 0;
+}
+
+header nav ul li {
+    flex: 1; 
+    text-align: center;
+    padding: 10px 0; 
+}
+
+header nav ul li:hover{
+    background-color: #fc5252;
+}
+
+header nav ul li a:hover{
+    background-color: #fc5252;
+}
+/*紹介・概要------------------------*/
+.introduction{
+    margin-top: 100px;
+    height: 200px;
+    background-color: #ddd;
+    border-radius: 25px;
+}
+
+.introduction h2{
+    text-align: center;
+    padding: 20px 0;
+}
+/*検索タグ------------------------*/
+.serch{
+    margin-top: 50px;
+}
+/*ランキング表示------------------------*/
+.ranking{
+    width: 90%;
+    max-width: 100%;
+    /* min-width: 800px;  小さい画面でスクロールが出るので必要なければ外す */
+    margin: 0 auto; 
+    text-align: center; 
+    box-sizing: border-box;
+    padding: 20px 0;
+}
+/*------------------------*/
+/*------------------------*/
