@@ -43,7 +43,7 @@ function searchAnime() {
         .then(res => res.json())
         .then(data => {
             const mediaList = data.data.Page.media;
-            
+
             if (!mediaList || mediaList.length === 0) {
                 document.getElementById('results').innerHTML = '<p>該当するアニメが見つかりません。</p>';
                 return;
@@ -69,9 +69,10 @@ function searchAnime() {
         });
 }
 
-// 検索ボタンをクリックしたときの処理
-document.getElementById('searchButton').addEventListener('click', function() {
-    searchAnime();
+// 送信ボタンをクリックしたときの処理
+document.getElementById('searchButton').addEventListener('click', function(event) {
+    event.preventDefault(); // フォームの送信を防ぐ
+    searchAnime(); // 検索処理を実行
 });
 
 // 入力イベントで検索候補を表示する
@@ -84,7 +85,7 @@ document.getElementById('animeName').addEventListener('input', debounce(function
 // デバウンス関数（500msの遅延を適用）
 function debounce(func, delay) {
     let timeoutId;
-    return function (...args) {
+    return function(...args) {
         clearTimeout(timeoutId);
         timeoutId = setTimeout(() => {
             func.apply(this, args);
