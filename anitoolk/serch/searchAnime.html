@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="searchAnime.js" defer></script>  <!-- deferを使って読み込み順序を制御 -->
+    <title>アニメ検索</title>
+</head>
+<body>
+
+    <h1>アニメ検索</h1>
+    <form autocomplete="off">
+        <input list="animeList" type="text" id="animeName" placeholder="アニメのタイトルを入力" autocomplete="off">
+        <datalist id="animeList"></datalist>
+        <button id="searchButton">検索</button>
+    </form>
+    <div id="results"></div>
+
+</body>
+</html>
