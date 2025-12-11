@@ -4,7 +4,7 @@
 }
 
 body{
-    background-color: rgb(204, 224, 243);
+    background-color: rgb(73 166 255);
 }
 
 .wapper{
@@ -38,7 +38,7 @@ header nav ul li {
 }
 
 header nav ul li:hover{
-    background-color: #fc5252;
+    background-color: #f14e4e;
 }
 
 header nav ul li a:hover{
