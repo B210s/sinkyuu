@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="anime_suggestions.css">
+    <title>アニメ検索</title>
+</head>
+
+<body>
+    <h1>アニメ検索</h1>
+    <div>
+        <input list="list" type="text" id="animeKeyword" placeholder="アニメのキーワードを入力">
+        <datalist id="list"></datalist>
+    </div>
+    <!-- 送信ボタンを追加 -->
+    <button id="searchButton">検索</button>
+    
+    <!-- 検索結果を表示する場所 -->
+    <div id="results"></div>
+
+    <script src="anime_suggestions.js"></script>
+</body>
+
+</html>
