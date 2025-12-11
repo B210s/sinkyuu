@@ -1,5 +1,4 @@
 <?php
-// ...existing code...
 // AniList API
 const ANILIST_API_URL = "https://graphql.anilist.co";
 
@@ -28,14 +27,17 @@ query ($id: Int) {
       month
       day
     }
-    characters(role: MAIN) {
-      nodes {
-        name {
-          native
-          full
-        }
-        image {
-          large
+    characters {
+      edges {
+        role
+        node {
+          name {
+            native
+            full
+          }
+          image {
+            large
+          }
         }
       }
     }
@@ -58,6 +60,8 @@ curl_setopt_array($ch, [
 ]);
 
 $response = curl_exec($ch);
+
+// cURLエラーチェック
 if (curl_errno($ch)) {
     echo 'cURLエラー: ' . htmlspecialchars(curl_error($ch), ENT_QUOTES, 'UTF-8');
     curl_close($ch);
@@ -65,13 +69,19 @@ if (curl_errno($ch)) {
 }
 curl_close($ch);
 
+// レスポンスチェック
+if (!$response) {
+    echo 'レスポンスが空です。API呼び出しに失敗しました。';
+    exit;
+}
+
 $data = json_decode($response, true);
 if (json_last_error() !== JSON_ERROR_NONE) {
     echo 'JSON解析エラー';
     exit;
 }
+
 if (!empty($data['errors'])) {
-    // GraphQLのエラー表示（開発時のみ）
     echo 'APIエラー: ' . htmlspecialchars($data['errors'][0]['message'] ?? '不明なエラー', ENT_QUOTES, 'UTF-8');
     exit;
 }
@@ -82,7 +92,10 @@ if (!$anime) {
     exit;
 }
 
-// フォールバックとエスケープ
+// ──────────────────────────────
+// データ整形
+// ──────────────────────────────
+
 $title = $anime['title']['native'] ?? $anime['title']['romaji'] ?? 'タイトル不明';
 $titleEsc = htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
 
@@ -95,11 +108,29 @@ $genresEsc = array_map(fn($g) => htmlspecialchars($g, ENT_QUOTES, 'UTF-8'), $gen
 $sd = $anime['startDate'] ?? [];
 $startDateStr = ($sd['year'] ?? '') ? sprintf('%s/%s/%s', $sd['year'], $sd['month'] ?? '??', $sd['day'] ?? '??') : '未定';
 
-$chars = $anime['characters']['nodes'] ?? [];
+$edges = $anime['characters']['edges'] ?? [];
 
-// description は asHtml: false にしているのでエスケープして改行を保持
+// ──────────────
+// キャラ分類
+// ──────────────
+$mainChars = [];
+$supportingChars = [];
+
+foreach ($edges as $edge) {
+    $role = $edge['role'] ?? '';
+    $node = $edge['node'] ?? null;
+    if (!$node) continue;
+
+    if ($role === 'MAIN') {
+        $mainChars[] = $node;
+    } elseif ($role === 'SUPPORTING') {
+        $supportingChars[] = $node;
+    }
+}
+
 $description = $anime['description'] ?? '';
 $descriptionEsc = nl2br(htmlspecialchars($description, ENT_QUOTES, 'UTF-8'));
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -118,8 +149,8 @@ $descriptionEsc = nl2br(htmlspecialchars($description, ENT_QUOTES, 'UTF-8'));
 <p><strong>放送開始：</strong> <?php echo htmlspecialchars($startDateStr, ENT_QUOTES, 'UTF-8'); ?></p>
 
 <h2>主要キャラ</h2>
-<?php if (!empty($chars)): ?>
-    <?php foreach ($chars as $char): ?>
+<?php if (!empty($mainChars)): ?>
+    <?php foreach ($mainChars as $char): ?>
         <?php
             $cname = $char['name']['native'] ?? $char['name']['full'] ?? '不明';
             $cnameEsc = htmlspecialchars($cname, ENT_QUOTES, 'UTF-8');
@@ -132,6 +163,23 @@ $descriptionEsc = nl2br(htmlspecialchars($description, ENT_QUOTES, 'UTF-8'));
     <?php endforeach; ?>
 <?php else: ?>
     <p>主要キャラ情報はありません。</p>
+<?php endif; ?>
+
+<h2>脇役キャラ</h2>
+<?php if (!empty($supportingChars)): ?>
+    <?php foreach ($supportingChars as $char): ?>
+        <?php
+            $cname = $char['name']['native'] ?? $char['name']['full'] ?? '不明';
+            $cnameEsc = htmlspecialchars($cname, ENT_QUOTES, 'UTF-8');
+            $cimg = $char['image']['large'] ?? 'placeholder-char.png';
+        ?>
+        <div style="display:inline-block; text-align:center; margin:10px;">
+            <img src="<?php echo htmlspecialchars($cimg, ENT_QUOTES, 'UTF-8'); ?>" width="80" alt="<?php echo $cnameEsc; ?>"><br>
+            <?php echo $cnameEsc; ?>
+        </div>
+    <?php endforeach; ?>
+<?php else: ?>
+    <p>脇役キャラ情報はありません。</p>
 <?php endif; ?>
 
 </body>

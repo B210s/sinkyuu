@@ -51,6 +51,16 @@ header nav ul li a:hover{
     height: 200px;
     background-color: #ddd;
     border-radius: 25px;
+    padding-bottom: 20px; 
+}
+
+.introduction::after {
+    --height: 20px;
+    mask-image:
+        url(img/wave.svg),
+        linear-gradient(to bottom, transparent 0%, transparent var(--height), #000 var(--height), #000 100%);
+    mask-size: 240px;
+    margin-top: calc(-1 * var(--height));
 }
 
 .introduction h2{
