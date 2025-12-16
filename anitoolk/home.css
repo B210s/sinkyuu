@@ -4,7 +4,7 @@
 }
 
 body{
-    background-color: rgb(73 166 255);
+    background-color: #2e2b2b;
 }
 
 .wapper{
@@ -12,6 +12,11 @@ body{
     max-width: 1000px;
     min-width: 800px;
     margin: 0 auto;
+}
+
+.back{
+    background-color: #63A8E8; 
+    padding-top: 100px;
 }
 /*ヘッダー------------------------*/
 header h1{
@@ -39,28 +44,17 @@ header nav ul li {
 }
 
 header nav ul li:hover{
-    background-color: #f14e4e;
+    background-color: #3A6893;
 }
 
 header nav ul li a:hover{
-    background-color: #fc5252;
+    background-color: #3A6893;
 }
 /*紹介・概要------------------------*/
 .introduction{
-    margin-top: 100px;
     height: 200px;
     background-color: #ddd;
     border-radius: 25px;
-    padding-bottom: 20px; 
-}
-
-.introduction::after {
-    --height: 20px;
-    mask-image:
-        url(img/wave.svg),
-        linear-gradient(to bottom, transparent 0%, transparent var(--height), #000 var(--height), #000 100%);
-    mask-size: 240px;
-    margin-top: calc(-1 * var(--height));
 }
 
 .introduction h2{
@@ -76,10 +70,20 @@ header nav ul li a:hover{
     width: 90%;
     max-width: 100%;
     /* min-width: 800px;  小さい画面でスクロールが出るので必要なければ外す */
-    margin: 0 auto; 
-    text-align: center; 
+    margin: 100px auto 0 auto; 
     box-sizing: border-box;
     padding: 20px 0;
 }
 /*------------------------*/
+.intro-divider {
+    display: flex;
+    justify-content: center; 
+}
+
+.intro-divider img {
+    width: 100vw;
+    max-width: none;
+    height: 150px;
+    display: block;
+}
 /*------------------------*/

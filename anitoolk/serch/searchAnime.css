@@ -1,8 +1,133 @@
-*{
+/* 基本スタイル */
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #2e2b2b; /* home.css と統一 */
+    color: #fff;
     padding: 0;
 }
 
-h1{
-    font-size: 100px;
+h1 {
+    font-size: 3em;
+    text-align: center;
+    margin-top: 20px;
+    color: #63A8E8; /* home.css のアクセントカラーと統一 */
+}
+
+/* 検索フォーム */
+form {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    gap: 20px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: 1px solid #63A8E8; /* home.css と統一 */
+    width: 300px;
+    background-color: #1c1c1c;
+    color: #fff;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #3A6893; /* ホバー色と統一 */
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #63A8E8; /* home.css と統一 */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #fff;
+}
+
+button:hover {
+    background-color: #3A6893; /* ホバー色 */
+}
+
+/* 検索結果のスタイル */
+#results {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 40px;
+    gap: 20px;
+}
+
+.anime_link {
+    text-decoration: none;
+    color: #fff;
+}
+
+.anime_item {
+    background-color: #1c1c1c; /* home.css と統一 */
+    padding: 20px;
+    border-radius: 10px;
+    width: 200px;
+    transition: transform 0.3s ease;
+    text-align: center;
+    /* レスポンシブ対応用にサイズ指定 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.anime_item:hover {
+    transform: translateY(-10px);
+    background-color: #3A6893; /* ホバー色 */
+}
+
+.anime_item img {
+    width: 100%;  /* 画像をコンテナの幅に合わせて調整 */
+    height: 200px; /* 高さを固定 */
+    object-fit: cover; /* 画像が縦横比を保ちながら枠内に収まる */
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.anime_item h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+/* レスポンシブデザイン */
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 2em;
+    }
+
+    /* 検索フォーム */
+    form {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    input[type="text"] {
+        width: 100%;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    /* 検索結果 */
+    .anime_item {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .anime_item img {
+        height: 150px; /* モバイルでも画像を適切な高さに調整 */
+    }
 }

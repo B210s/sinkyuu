@@ -1,0 +1,108 @@
+/* 基本設定 */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #2e2b2b;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+.Anime_broadcast_detaile{
+    margin-left: 30px;
+}
+
+/* タイトル */
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 2.5em;
+    color: #63A8E8;
+}
+
+/* バナー画像 */
+.anime-banner {
+    width: 100%;
+    height: 350px; /* バナー画像の高さを設定 */
+    background-color: #333;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    margin-bottom: 30px; /* バナー下にスペースを追加 */
+}
+
+.anime-main-image-container {
+    position: absolute;
+    bottom: 10px; /* バナーの下部に配置 */
+    left: 10px; /* 左寄せ */
+    width: 250px; /* 幅を固定 */
+    max-height: 150px; /* 最大高さ */
+    height: auto; /* 高さは自動調整 */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.anime-main-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-left: 30px;
+}
+
+/* ジャンルと放送時期 */
+.anime-info {
+    margin-top: 170px; /* バナー画像の下に十分な余白を作る */
+}
+
+.anime-info p {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+.anime-info strong {
+    color: #fff;
+}
+
+/* キャラクターリスト */
+.character-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.character-card {
+    text-align: center;
+    background-color: #1c1c1c;
+    padding: 10px;
+    width: 150px;
+}
+
+
+.character-card img {
+    width: 66.67%;
+    height: auto;
+    border-radius: 5%;
+}
+
+.character-card p {
+    margin-top: 10px;
+    font-size: 1.1em;
+}
+
+/* レスポンシブ対応 */
+@media screen and (max-width: 768px) {
+    .anime-main-image-container {
+        width: 200px;
+        max-height: 120px; /* モバイルで画像が小さくなる */
+    }
+
+    .anime-info {
+        font-size: 1em;
+        margin-top: 180px; /* モバイルで余白を少し調整 */
+    }
+
+    .character-list {
+        flex-direction: column;
+        align-items: center;
+    }
+}

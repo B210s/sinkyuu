@@ -16,10 +16,12 @@ query ($id: Int) {
     title {
       native
       romaji
+      english
     }
     coverImage {
       large
     }
+    bannerImage
     description(asHtml: false)
     genres
     startDate {
@@ -27,6 +29,14 @@ query ($id: Int) {
       month
       day
     }
+    endDate {
+      year
+      month
+      day
+    }
+    averageScore
+    popularity
+    episodes
     characters {
       edges {
         role
@@ -131,56 +141,84 @@ foreach ($edges as $edge) {
 $description = $anime['description'] ?? '';
 $descriptionEsc = nl2br(htmlspecialchars($description, ENT_QUOTES, 'UTF-8'));
 
+// バナー画像
+$bannerImage = $anime['bannerImage'] ?? 'placeholder-banner.png';
+$bannerImageEsc = htmlspecialchars($bannerImage, ENT_QUOTES, 'UTF-8');
 ?>
+
+
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <title><?php echo $titleEsc; ?></title>
+    <link rel="stylesheet" href="./animedetail.css">
 </head>
 <body>
 
+<!-- バナー画像 -->
+<div class="anime-banner" style="background-image: url('<?php echo $bannerImageEsc; ?>');">
+    <div class="anime-main-image-container">
+        <img src="<?php echo $imgEsc; ?>" alt="<?php echo $titleEsc; ?>" class="anime-main-image">
+    </div>
+</div>
+
+<!-- タイトル -->
 <h1><?php echo $titleEsc; ?></h1>
 
-<img src="<?php echo $imgEsc; ?>" width="250" alt="<?php echo $titleEsc; ?>">
+<div class="Anime_broadcast_detaile">   
 
+<div class="anime-info">
+<!-- ジャンル -->
 <p><strong>ジャンル：</strong> <?php echo implode(', ', $genresEsc) ?: 'なし'; ?></p>
 
+<!-- 放送開始 -->
 <p><strong>放送開始：</strong> <?php echo htmlspecialchars($startDateStr, ENT_QUOTES, 'UTF-8'); ?></p>
+</div>
 
+
+<!-- 主要キャラ -->
 <h2>主要キャラ</h2>
 <?php if (!empty($mainChars)): ?>
-    <?php foreach ($mainChars as $char): ?>
-        <?php
-            $cname = $char['name']['native'] ?? $char['name']['full'] ?? '不明';
-            $cnameEsc = htmlspecialchars($cname, ENT_QUOTES, 'UTF-8');
-            $cimg = $char['image']['large'] ?? 'placeholder-char.png';
-        ?>
-        <div style="display:inline-block; text-align:center; margin:10px;">
-            <img src="<?php echo htmlspecialchars($cimg, ENT_QUOTES, 'UTF-8'); ?>" width="80" alt="<?php echo $cnameEsc; ?>"><br>
-            <?php echo $cnameEsc; ?>
-        </div>
-    <?php endforeach; ?>
+    <div class="character-list">
+        <?php foreach ($mainChars as $char): ?>
+            <?php
+                $cname = $char['name']['native'] ?? $char['name']['full'] ?? '不明';
+                $cnameEsc = htmlspecialchars($cname, ENT_QUOTES, 'UTF-8');
+                $cimg = $char['image']['large'] ?? 'placeholder-char.png';
+            ?>
+            <div class="character-card">
+                <img src="<?php echo htmlspecialchars($cimg, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo $cnameEsc; ?>"><br>
+                <?php echo $cnameEsc; ?>
+            </div>
+        <?php endforeach; ?>
+    </div>
 <?php else: ?>
     <p>主要キャラ情報はありません。</p>
 <?php endif; ?>
 
+<!-- 脇役キャラ -->
 <h2>脇役キャラ</h2>
 <?php if (!empty($supportingChars)): ?>
-    <?php foreach ($supportingChars as $char): ?>
-        <?php
-            $cname = $char['name']['native'] ?? $char['name']['full'] ?? '不明';
-            $cnameEsc = htmlspecialchars($cname, ENT_QUOTES, 'UTF-8');
-            $cimg = $char['image']['large'] ?? 'placeholder-char.png';
-        ?>
-        <div style="display:inline-block; text-align:center; margin:10px;">
-            <img src="<?php echo htmlspecialchars($cimg, ENT_QUOTES, 'UTF-8'); ?>" width="80" alt="<?php echo $cnameEsc; ?>"><br>
-            <?php echo $cnameEsc; ?>
-        </div>
-    <?php endforeach; ?>
+    <div class="character-list">
+        <?php foreach ($supportingChars as $char): ?>
+            <?php
+                $cname = $char['name']['native'] ?? $char['name']['full'] ?? '不明';
+                $cnameEsc = htmlspecialchars($cname, ENT_QUOTES, 'UTF-8');
+                $cimg = $char['image']['large'] ?? 'placeholder-char.png';
+            ?>
+            <div class="character-card">
+                <img src="<?php echo htmlspecialchars($cimg, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo $cnameEsc; ?>"><br>
+                <?php echo $cnameEsc; ?>
+            </div>
+        <?php endforeach; ?>
+    </div>
 <?php else: ?>
     <p>脇役キャラ情報はありません。</p>
 <?php endif; ?>
+
+</div>
 
 </body>
 </html>

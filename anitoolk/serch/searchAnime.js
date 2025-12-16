@@ -15,6 +15,7 @@ function searchAnime() {
         query ($search: String) {
             Page(page: 1, perPage: 10) {
                 media(search: $search, type: ANIME) {
+                    id
                     title {
                         native
                     }
@@ -53,6 +54,7 @@ function searchAnime() {
             let resultHTML = '';
             mediaList.forEach(anime => {
                 resultHTML += `
+                    <a href="../animedetail.php?id=${anime.id}" class="anime_link">
                     <div class="anime_item">
                         <h3>${anime.title.native}</h3>
                         <img src="${anime.coverImage.large}" width="150"><br>
